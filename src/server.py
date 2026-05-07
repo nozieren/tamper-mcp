@@ -108,7 +108,7 @@ async def handle_call_tool(name: str, arguments: dict | None) -> list[TextConten
     raise ValueError(f"Unknown tool: {name}")
 
 # 4. SSE Transport and Starlette
-sse = SseServerTransport("/message")
+sse = SseServerTransport("/message/")
 
 async def handle_sse(request: Request):
     async with sse.connect_sse(
