@@ -97,7 +97,13 @@ async def handle_call_tool(name: str, arguments: dict | None) -> list[TextConten
             content=[
                 TextContent(type="text", text="Voici le menu de Tamper! (Lille).")
             ],
-            **{"_meta": {}}
+            **{
+                "_meta": {
+                    "ui": {
+                        "resourceUri": "ui://widget/tamper.html"
+                    }
+                }
+            }
         )
     raise ValueError(f"Unknown tool: {name}")
 
