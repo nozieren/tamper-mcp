@@ -27,7 +27,8 @@ function getMenuJson() {
 }
 
 // Read UI Widget HTML
-const widgetPath = join(__dirname, "web", "tamper.html");
+// Note: __dirname is /dist at runtime, so we need to point to /src/web
+const widgetPath = join(__dirname, "..", "src", "web", "tamper.html");
 const widgetHtml = existsSync(widgetPath) ? readFileSync(widgetPath, "utf-8") : "<h1>Widget not found</h1>";
 
 // 5. Express Server Setup
