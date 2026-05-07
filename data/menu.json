@@ -1,0 +1,48 @@
+{
+  "coffeeshop": "Tamper!",
+  "address": "10 Rue des Vieux Murs, 59800 Lille",
+  "website": "https://tamperlille.com",
+  "kitchenHours": {
+    "weekdays": "9:00 AM - 2:30 PM",
+    "weekends": "9:00 AM - 2:30 PM (until 3:30 PM on Saturdays)"
+  },
+  "menu": {
+    "breakfast": [
+      { "name": "BREAD, BUTTER & JAM", "description": "Pitman bread, local butter, and local jam", "price": "5,50 €" },
+      { "name": "Cinnamon roll", "description": "Homemade cinnamon-filled brioche, served warm with powdered sugar and honey", "price": "6,00 €" },
+      { "name": "YOGURT & GRANOLA", "description": "Homemade granola, honey, and seasonal fresh fruits", "price": "7,00 €" },
+      { "name": "SOFT-BOILED EGG", "description": "Served with toast soldiers and local butter", "price": "5,00 €" }
+    ],
+    "brunch": [
+      { "name": "SWEET PANCAKES", "description": "Seasonal fruits, organic chocolate spread or maple syrup", "price": "13,00 €" },
+      { "name": "SAVORY PANCAKES", "description": "Grilled smoked bacon, fried egg, maple syrup", "price": "13,50 €" },
+      { "name": "Tamper pas l'appétit", "description": "Toasted sourdough, fried egg, grilled smoked bacon, avocado, Comté cheese, red beans, salad", "price": "17,50 €" },
+      { "name": "Egg & Muffin", "description": "Muffin bread, grilled smoked bacon, egg, melted cheddar, salad", "price": "11,50 €" }
+    ],
+    "plates": [
+      { "name": "Grilled Cheese", "description": "Toasted sourdough with melted cheddar, pickles, BBQ sauce", "price": "11,50 €" },
+      { "name": "Avocado Toast", "description": "Sourdough bread, avocado, soft-boiled egg, smoked salmon, pickles, feta, salad", "price": "15,00 €" },
+      { "name": "Egg Slut", "description": "Toasted milk bread, garlic butter, Comté cheese, bacon, soft-boiled egg, chives, salad, spicy mayo, fried onions", "price": "13,50 €" },
+      { "name": "Huevos rancheros", "description": "Tortilla, avocado, 2 eggs, spiced beans, chimichurri sauce, herbs, red onions", "price": "13,50 €" },
+      { "name": "Butternut toast", "description": "Sourdough bread, goat cheese spread, butternut, pear, walnuts, honey, salad", "price": "14,50 €" }
+    ],
+    "hotDrinks": [
+      { "name": "ESPRESSO", "price": "2,50 €" },
+      { "name": "ESPRESSO MACCHIATO", "price": "3,50 €" },
+      { "name": "LONG BLACK", "price": "4,00 €" },
+      { "name": "FLAT WHITE", "price": "4,60 €" },
+      { "name": "CAPPUCCINO", "price": "4,50 €" },
+      { "name": "LATTE", "price": "4,90 €" },
+      { "name": "MATCHA LATTE", "price": "5,50 €" },
+      { "name": "UBE LATTE", "price": "5,00 €" },
+      { "name": "CHAI LATTE", "price": "5,00 €" },
+      { "name": "MOCHA", "price": "5,00 €" },
+      { "name": "HOT CHOCOLATE", "price": "5,00 €" },
+      { "name": "GOLDEN LATTE", "price": "5,00 €" },
+      { "name": "FILTER V60", "price": "5,00 €" },
+      { "name": "AEROPRESS", "price": "6,00 €" },
+      { "name": "FRENCH PRESS", "price": "6,00 €" }
+    ],
+    "notes": "All milk-based drinks are available with Oat milk. Coffee beans are from local roasters Cloud Forest and Muda."
+  }
+}
