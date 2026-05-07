@@ -73,6 +73,11 @@ async def handle_list_tools() -> list[Tool]:
                 "properties": {},
                 "additionalProperties": False
             },
+            annotations={
+                "readOnlyHint": True,
+                "openWorldHint": False,
+                "destructiveHint": False
+            },
             **{
                 "_meta": {
                     "ui": {
