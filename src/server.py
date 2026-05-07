@@ -38,13 +38,15 @@ async def handle_list_resources() -> list[Resource]:
             uri="ui://widget/tamper.html",
             name="Tamper UI Widget",
             mimeType="text/html;profile=mcp-app",
-            meta={
-                "ui": {
-                    "domain": "https://tamper-mcp.onrender.com",
-                    "csp": {
-                        "connectDomains": [],
-                        "resourceDomains": ["https://fonts.googleapis.com", "https://fonts.gstatic.com"],
-                        "frameDomains": ["https://www.google.com"]
+            **{
+                "_meta": {
+                    "ui": {
+                        "domain": "https://tamper-mcp.onrender.com",
+                        "csp": {
+                            "connectDomains": [],
+                            "resourceDomains": ["https://fonts.googleapis.com", "https://fonts.gstatic.com"],
+                            "frameDomains": ["https://www.google.com"]
+                        }
                     }
                 }
             }
@@ -71,9 +73,11 @@ async def handle_list_tools() -> list[Tool]:
                 "properties": {},
                 "additionalProperties": False
             },
-            meta={
-                "ui": {
-                    "resourceUri": "ui://widget/tamper.html"
+            **{
+                "_meta": {
+                    "ui": {
+                        "resourceUri": "ui://widget/tamper.html"
+                    }
                 }
             }
         )
@@ -88,7 +92,7 @@ async def handle_call_tool(name: str, arguments: dict | None) -> list[TextConten
             content=[
                 TextContent(type="text", text="Voici le menu de Tamper! (Lille).")
             ],
-            meta={}
+            **{"_meta": {}}
         )
     raise ValueError(f"Unknown tool: {name}")
 
