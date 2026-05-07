@@ -9,7 +9,7 @@ from starlette.middleware import Middleware
 from starlette.middleware.cors import CORSMiddleware
 from mcp.server import Server
 from mcp.server.sse import SseServerTransport
-from mcp.types import Resource
+from mcp.types import Resource, Tool, TextContent, CallToolResult
 
 # 1. Initialize MCP Server
 server = Server("tamper-mcp")
@@ -33,6 +33,21 @@ async def handle_list_resources() -> list[Resource]:
             name="Tamper! Menu",
             description="The complete food and drink menu for Tamper! coffeeshop in Lille.",
             mimeType="application/json",
+        ),
+        Resource(
+            uri="ui://widget/tamper.html",
+            name="Tamper UI Widget",
+            mimeType="text/html;profile=mcp-app",
+            meta={
+                "ui": {
+                    "domain": "https://tamper-mcp.onrender.com",
+                    "csp": {
+                        "connectDomains": [],
+                        "resourceDomains": ["https://fonts.googleapis.com", "https://fonts.gstatic.com"],
+                        "frameDomains": ["https://www.google.com"]
+                    }
+                }
+            }
         )
     ]
 
@@ -40,7 +55,42 @@ async def handle_list_resources() -> list[Resource]:
 async def handle_read_resource(uri: str) -> str | bytes:
     if uri == "tamper://menu":
         return get_menu_data()
+    if uri == "ui://widget/tamper.html":
+        widget_path = Path(__file__).parent / "web" / "tamper.html"
+        return widget_path.read_text(encoding="utf-8")
     raise ValueError(f"Unknown resource URI: {uri}")
+
+@server.list_tools()
+async def handle_list_tools() -> list[Tool]:
+    return [
+        Tool(
+            name="show_menu",
+            description="Displays the menu of the Tamper! coffeeshop. Use this when the user asks for the menu, prices, or food options.",
+            inputSchema={
+                "type": "object", 
+                "properties": {},
+                "additionalProperties": False
+            },
+            meta={
+                "ui": {
+                    "resourceUri": "ui://widget/tamper.html"
+                }
+            }
+        )
+    ]
+
+@server.call_tool()
+async def handle_call_tool(name: str, arguments: dict | None) -> list[TextContent] | CallToolResult:
+    if name == "show_menu":
+        menu_json = json.loads(get_menu_data())
+        return CallToolResult(
+            structuredContent=menu_json,
+            content=[
+                TextContent(type="text", text="Voici le menu de Tamper! (Lille).")
+            ],
+            meta={}
+        )
+    raise ValueError(f"Unknown tool: {name}")
 
 # 4. SSE Transport and Starlette
 sse = SseServerTransport("/message")

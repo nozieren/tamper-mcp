@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tamper! Menu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f1115;
+            --surface-color: #1a1d24;
+            --accent-color: #e2a856;
+            --text-main: #f0f0f0;
+            --text-muted: #a0a5b0;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            padding: 1rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem 0;
+            color: var(--text-muted);
+            font-style: italic;
+            animation: pulse 1.5s infinite;
+        }
+
+        #menu-container {
+            display: none;
+            gap: 2rem;
+            flex-direction: column;
+        }
+
+        .category {
+            background: var(--surface-color);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .category:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            border-color: rgba(226, 168, 86, 0.3);
+        }
+
+        .category h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--accent-color);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .category h2::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border-color);
+            margin-left: 1rem;
+        }
+
+        .menu-item {
+            margin-bottom: 1.25rem;
+            padding-bottom: 1.25rem;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .menu-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.25rem;
+        }
+
+        .item-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--text-main);
+        }
+
+        .item-price {
+            font-weight: 600;
+            color: var(--accent-color);
+            background: rgba(226, 168, 86, 0.1);
+            padding: 0.15rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            margin-left: 1rem;
+        }
+
+        .item-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+
+        .maps-section {
+            margin-top: 2rem;
+            background: var(--surface-color);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .maps-section h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--accent-color);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .map-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .map-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+
+        @media (max-width: 600px) {
+            .category {
+                padding: 1.25rem;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Tamper!</h1>
+            <p class="subtitle">Espresso Bar & Food • 10 Rue des Vieux Murs, Lille</p>
+        </header>
+
+        <div id="loading" class="loading">
+            Brewing data... Please wait.
+        </div>
+
+        <div id="menu-container"></div>
+
+        <div class="maps-section">
+            <h2>Find Us</h2>
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2530.407982181518!2d3.0601633!3d50.6402484!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c2d5807952aeb5%3A0x63351221b213b28b!2sTamper!%20Espresso%20Bar!5e0!3m2!1sen!2sfr!4v1700000000000!5m2!1sen!2sfr" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const loadingEl = document.getElementById('loading');
+        const containerEl = document.getElementById('menu-container');
+
+        function renderMenu(data) {
+            if (!data || !data.categories) {
+                loadingEl.textContent = "Error loading menu data.";
+                return;
+            }
+
+            loadingEl.style.display = 'none';
+            containerEl.style.display = 'flex';
+            containerEl.innerHTML = '';
+
+            data.categories.forEach(category => {
+                const catDiv = document.createElement('div');
+                catDiv.className = 'category';
+
+                const catTitle = document.createElement('h2');
+                catTitle.textContent = category.name;
+                catDiv.appendChild(catTitle);
+
+                if (category.items && category.items.length > 0) {
+                    category.items.forEach(item => {
+                        const itemDiv = document.createElement('div');
+                        itemDiv.className = 'menu-item';
+
+                        const headerDiv = document.createElement('div');
+                        headerDiv.className = 'item-header';
+
+                        const nameSpan = document.createElement('span');
+                        nameSpan.className = 'item-name';
+                        nameSpan.textContent = item.name;
+
+                        headerDiv.appendChild(nameSpan);
+
+                        if (item.price) {
+                            const priceSpan = document.createElement('span');
+                            priceSpan.className = 'item-price';
+                            priceSpan.textContent = item.price;
+                            headerDiv.appendChild(priceSpan);
+                        }
+
+                        itemDiv.appendChild(headerDiv);
+
+                        if (item.description) {
+                            const descDiv = document.createElement('div');
+                            descDiv.className = 'item-desc';
+                            descDiv.textContent = item.description;
+                            itemDiv.appendChild(descDiv);
+                        }
+
+                        catDiv.appendChild(itemDiv);
+                    });
+                }
+
+                containerEl.appendChild(catDiv);
+            });
+        }
+
+        // Listen for MCP Tool Result payload from ChatGPT
+        window.addEventListener("message", (event) => {
+            // Must verify it's coming from parent frame
+            if (event.source !== window.parent) return;
+            const message = event.data;
+            if (!message || message.jsonrpc !== "2.0") return;
+            
+            // Match the tool result notification
+            if (message.method === "ui/notifications/tool-result") {
+                const toolResult = message.params;
+                if (toolResult && toolResult.structuredContent) {
+                    renderMenu(toolResult.structuredContent);
+                }
+            }
+        }, { passive: true });
+        
+        // DEV: Uncomment to test locally without ChatGPT iframe
+        // fetch('/data/menu.json').then(r => r.json()).then(renderMenu).catch(e => console.log(e));
+    </script>
+</body>
+</html>
