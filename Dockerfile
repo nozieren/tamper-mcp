@@ -1,16 +1,21 @@
-FROM python:3.11-slim
+FROM node:22-alpine
 
 WORKDIR /app
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Copy package files
+COPY package*.json ./
 
-COPY src/ src/
-COPY data/ data/
+# Install dependencies
+RUN npm ci
 
-# Set the PORT environment variable (default for Cloud Run)
-ENV PORT=8000
-EXPOSE $PORT
+# Copy the rest of the application
+COPY . .
 
-# Start the SSE server using Uvicorn
-CMD ["sh", "-c", "uvicorn src.server:app --host 0.0.0.0 --port ${PORT}"]
+# Build the TypeScript code
+RUN npm run build
+
+# Expose the port the app runs on
+EXPOSE 8000
+
+# Command to run the application
+CMD ["npm", "start"]
